@@ -1,11 +1,15 @@
 from django.shortcuts import render
 from .models import *
 #adding required and importing classes
+#
+from rest_framework.permissions import BasePermission
 
+from rest_framework.views import APIView
 from .serializers import ProductItemSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 def store(request):
     products = Product.objects.all()
@@ -73,3 +77,9 @@ def product_by_key(request, pk):
         products.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+##
+class DemoView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        print(request.user)
+        return Response({'success': 'You are authenticated'})
