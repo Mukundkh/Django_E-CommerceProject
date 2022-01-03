@@ -4,7 +4,6 @@ from .models import *
 #
 from rest_framework.permissions import BasePermission
 
-from rest_framework.views import APIView
 from .serializers import ProductItemSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -31,55 +30,50 @@ def checkout(request):
     context = {}
     return render(request, 'store/checkout.html', context)
 
-#creating api's of Product item
-@api_view(['GET','POST'])
-def product_list(request):
-    if request.method == 'GET':
-        products = Product.objects.all()
-        serializer = ProductItemSerializer(products, many=True)
-        return Response(serializer.data)
+# #creating api's of Product item
+# @api_view(['GET','POST'])
+# def product_list(request):
+#     if request.method == 'GET':
+#         products = Product.objects.all()
+#         serializer = ProductItemSerializer(products, many=True)
+#         return Response(serializer.data)
     
-    elif request.method == 'POST':
-        serializer = ProductItemSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == 'POST':
+#         serializer = ProductItemSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET','PUT','DELETE','PATCH'])
-def product_by_key(request, pk):
-    try:
-        products = Product.objects.get(pk=pk)
+# @api_view(['GET','PUT','DELETE','PATCH'])
+# def product_by_key(request, pk):
+#     try:
+#         products = Product.objects.get(pk=pk)
     
-    except Product.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+#     except Product.DoesNotExist:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
     
-    if request.method == 'GET':
-        serializer = ProductItemSerializer(products)
-        return Response(serializer.data)
+#     if request.method == 'GET':
+#         serializer = ProductItemSerializer(products)
+#         return Response(serializer.data)
     
-    elif request.method == 'PUT':
-        serializer = ProductItemSerializer(products, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer._data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == 'PUT':
+#         serializer = ProductItemSerializer(products, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer._data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    elif request.method == 'PATCH':
-        serializer = ProductItemSerializer(products, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == 'PATCH':
+#         serializer = ProductItemSerializer(products, data=request.data, partial=True)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
-    elif request.method == 'DELETE':
-        products.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#     elif request.method == 'DELETE':
+#         products.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
-##
-class DemoView(APIView):
-    permission_classes = [IsAuthenticated]
-    def get(self, request):
-        print(request.user)
-        return Response({'success': 'You are authenticated'})
+# ##

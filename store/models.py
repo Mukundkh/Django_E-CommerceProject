@@ -11,6 +11,8 @@ class Customer(models.Model):
         return self.name
     
 class Product(models.Model):
+   
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField()
     digital = models.BooleanField(default=False, null=True, blank=False)

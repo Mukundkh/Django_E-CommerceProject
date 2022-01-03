@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product
+from store.models import Customer, Product, Order, OrderItem, ShippingAddress
 
 class ProductItemSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(read_only=True)
