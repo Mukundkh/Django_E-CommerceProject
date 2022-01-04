@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-j5*9tu6dv*&@4p2@c*6@is7nu4ey@qjrzu_1p205fq5y#q=ym=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['1.0.0.127.in-addr.arpa']
+ALLOWED_HOSTS = ['1.0.0.127.in-addr.arpa','127.0.0.1','localhost']
 
 
 # Application definition
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'user_app',
+    'django_filters',
+    'cart',
 
 ]
 
