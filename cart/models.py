@@ -53,12 +53,12 @@ class CartItem(models.Model):
     total_items = models.IntegerField(default=0)
     quantity = models.IntegerField(default=1)
 
-@receiver(pre_save, sender=CartItems)
-def correct_price(sender, **kwargs):
-    cart_items = kwargs['instance']
-    price_of_product = Product.objects.get(id=cart_items.product.id)
-    cart_items.price = cart_items.quantity * float(price_of_product.price)
-    total_cart_items = CartItems.objects.filter(user = cart_items.user )
-    cart = Cart.objects.get(id = cart_items.cart.id)
-    cart.total_price = cart_items.price
-    cart.save()
+# @receiver(pre_save, sender=CartItems)
+# def correct_price(sender, **kwargs):
+#     cart_items = kwargs['instance']
+#     price_of_product = Product.objects.get(id=cart_items.product.id)
+#     cart_items.price = cart_items.quantity * float(price_of_product.price)
+#     total_cart_items = CartItems.objects.filter(user = cart_items.user )
+#     cart = Cart.objects.get(id = cart_items.cart.id)
+#     cart.total_price = cart_items.price
+#     cart.save()

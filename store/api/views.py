@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from store.api.serializers import ProductItemSerializer
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 #just checking generics classes
 # from store.api.permissions import AdminOrReadOnly
 
@@ -60,8 +61,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductItemSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['name','price']
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name','price']
+    #filterset_fields = ['name','price']
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
