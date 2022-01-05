@@ -1,8 +1,8 @@
 from django.urls import path
-from cart.api import views
+
+from cart.views import CartAPIView, CheckProductInCart
 
 urlpatterns = [
-    # path('cartList/', views.CartItemAPIView.as_view()),
-    # path('cart-item/<int:pk>/', views.CartItemView.as_view()),
-
+    path('', CartAPIView.as_view()),
+    path('<product_id>/', CheckProductInCart.as_view()),
 ]
